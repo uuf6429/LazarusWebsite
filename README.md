@@ -30,5 +30,5 @@ Todo List
 Links & Contact
 ---------------
 
-Adnan Shameem: [email](needadnan@gmail.com) [site](http://www.adnan.co.vu/)
-Christian Sciberras: [email](christian@sciberras.me) [site](http://christian.sciberras.me/)
+ - Adnan Shameem: [email](mailto:needadnan@gmail.com) [site](http://www.adnan.co.vu/)
+ - Christian Sciberras: [email](mailto:christian@sciberras.me) [site](http://christian.sciberras.me/)
