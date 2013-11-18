@@ -11,6 +11,7 @@ class Application {
 		
 		$this->_config = $config;
 		$this->_page = new Page($this);
+		$this->_page->set_title($config->get('deftitle', 'Untitled'));
 	}
 	
 	/**

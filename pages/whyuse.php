@@ -29,4 +29,4 @@
 </p>
 
 <hr />
-<p>There are more things which Lazarus can do you which are not listed here. <br />For more features, please see the <a href="<?php echo get_page_url('features'); ?>">Features page</a>.</p>
+<p>There are more things which Lazarus can do you which are not listed here. <br />For more features, please see the <a href="<?php echo Page()->get_url('features'); ?>">Features page</a>.</p>

@@ -6,7 +6,7 @@
 	<div class="slidewrap">
 		<div class="left_shot">
 			<a href="http://wiki.lazarus.freepascal.org/Screenshots">
-				<img src="{ $theme_path }images/homeshot_1.gif" alt="Lazarus Screenshot" title="Lazarus IDE" />
+				<img src="<?php e_esc_html(DEF_WEBPATH.'/theme/img/homeshot_1.gif'); ?>" alt="Lazarus Screenshot" title="Lazarus IDE" />
 			</a>
 		</div>
 		<div class="slider_r">
@@ -18,11 +18,10 @@
 				<li>Open source (GPL/LGPL)</li>
 				<li>Delphi converter</li>
 			</ul>
-			<!--<p><a href="{ $home_php_name }?page=downloads" id="dl_btn" class="download_btn">Download</a></p>-->
-			<p><a href="{ $platform_download_link }" id="dl_btn" class="download__btn"><img src="{ $theme_path }images/download_btn.gif" alt="Download" /></a></p>
+			<p><a href="{ $platform_download_link }" id="dl_btn" class="download_btn"> </a></p>
 			<p class="small">{ $platform_download_for } 
 				<script>GetDlOSName();</script>
-				<noscript>| <a href="{ $home_php_name }?page=downloads">Other?</a></noscript>
+				<noscript>| <a href="<?php echo Page()->get_url('downloads'); ?>">Other?</a></noscript>
 			</p>
 			<div id="dl_menu" class="dl_menu" style="display:none;">
 				<ul>
@@ -37,7 +36,7 @@
 					<li><a href="{ $dl_mac32_url }">Mac OS X 32 Bits</a></li>
 					<li><a href="{ $dl_macppc_url }">Mac OS X Powerpc</a></li>
 					<hr />
-					<li><a href="{ $home_php_name }?page=downloads">Other Downloads and mirrors</a></li>
+					<li><a href="<?php echo Page()->get_url('downloads'); ?>">Other Downloads and mirrors</a></li>
 				</ul>
 			</div>
 		</div>
@@ -64,7 +63,7 @@
 						<p>You can create your own open source or commercial applications. With Lazarus you can create file browsers, image viewers, database applications, graphics editing software, games, 3D software, medical analysis software or any other type of software.</p>
 						<p class="content_more small">
 							<span><a href="http://wiki.freepascal.org/Lazarus_Application_Gallery" class="btlink">See Application Gallery</a></span>
-							<span><a href="{ $home_php_name }?page=whyuse">Why use it?</a></span>
+							<span><a href="<?php echo Page()->get_url('whyuse'); ?>">Why use it?</a></span>
 						</p>
 					</div>
 				</div>

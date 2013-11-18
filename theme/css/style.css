@@ -387,6 +387,29 @@ a.btlink:hover {
 	float:right;
 }
 
+.foot_right a {
+	display:inline-block;
+	margin: 2px;
+}
+
+#footer_logo_fp {
+	background: url('../img/footer_fp.gif') no-repeat top left;
+	width: 65px;
+	height: 30px;
+}
+
+#footer_logo_sf {
+	background: url('../img/footer_sf.gif') no-repeat top left;
+	width: 80px;
+	height: 15px;
+}
+
+#footer_logo_ol {
+	background: url('https://www.ohloh.net/p/lazarus/widgets/project_thin_badge.gif') no-repeat top left;
+	width: 130px;
+	height: 16px;
+}
+
 .page {
 	min-height: 500px;
 }
@@ -431,7 +454,7 @@ input[type=submit] {
 	display:block;
 	min-height:70px;
 	text-align:right;
-	background:url(images/topbar_bg_tile.gif);
+	background:url('../img/topbar_bg_tile.gif');
 	background-size:100% 100%;
 	background-repeat:repeat-x;
 	background-color:#b868cc;
@@ -441,7 +464,7 @@ input[type=submit] {
 .top_logo_bg {
 	display:block;
 	width:100%;
-	background:url(images/top_logo_bg.png);
+	background:url('../img/top_logo_bg.png');
 	background-repeat:no-repeat;
 }
 
@@ -455,6 +478,13 @@ input[type=submit] {
 	color:#FFFFFF;
 	line-height:1em;
 	text-align:left;
+}
+
+.top_logo_link {
+	width: 320px;
+	height: 71px;
+	display: inline-block;
+	background: url('../img/top_logo.png') no-repeat top left;
 }
 
 .top_links {
@@ -479,7 +509,7 @@ input[type=submit] {
 /*main page banner*/
 
 .slidewrap_bg {
-	background:url(images/mid_bg2.jpg);
+	background:url('../img/mid_bg2.jpg');
 	background-size:100% 100%;
 	background-repeat:repeat-x;
 	background-color:#00002f;
@@ -487,7 +517,7 @@ input[type=submit] {
 }
 
 .slidewrap {
-	background:url(images/mid_design2.jpg);
+	background:url('../img/mid_design2.jpg');
 	background-size:580px 100%;
 	background-repeat:no-repeat;
 	display:block;
@@ -526,15 +556,15 @@ input[type=submit] {
 
 .slider_r ul.right li {
 	list-style:none;
-	background: url(images/bullet_1.gif) no-repeat right;
+	background: url('../img/bullet_1.gif') no-repeat right;
 	padding-right: 1.4em;
 }
 
 a.download_btn {
 	display:inline-block;
-	width:203;
-	height:36;
-	background:url(images/download_btn.gif);
+	width:203px;
+	height:36px;
+	background:url('../img/download_btn.gif') no-repeat;
 	color:transparent !important;
 }
 

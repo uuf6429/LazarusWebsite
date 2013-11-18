@@ -9,6 +9,9 @@
 		<meta name="copyright" content="<?php e_esc_html(Page()->get_meta('copyright')); ?>" />
 		<meta name="keywords" content="<?php e_esc_html(Page()->get_meta('keywords')); ?>" />
 		<meta name="author" content="<?php e_esc_html(Page()->get_meta('author')); ?>" />
+		
+		<link rel="icon" href="<?php e_esc_html(DEF_WEBPATH.'/theme/img/favicon.ico'); ?>" type="image/x-icon" />
+		<link rel="shortcut icon" href="<?php e_esc_html(DEF_WEBPATH.'/theme/img/favicon.ico'); ?>" type="image/x-icon" />
 
 		<?php Page()->do_header(); ?>
 
@@ -20,7 +23,7 @@
 			<div class="top_bar">
 				<div class="top_logo_bg">
 					<div class="top_logo">
-						<a href="<?php e_esc_html(Page()->get_url('')); ?>" title="Lazarus"> </a>
+						<a class="top_logo_link" href="<?php e_esc_html(Page()->get_url('')); ?>" title="Lazarus"> </a>
 					</div>
 					<div class="top_links">
 						<?php echo Page()->get_menu('header'); ?>

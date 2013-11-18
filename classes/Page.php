@@ -83,22 +83,20 @@ class Page {
 			
 			$this->_name_cache = '';
 			
+			// try with URL rewriting, if enabled
 			if($this->_app->get_config()->get('rewrite', false)){
-				
-				// try with URL rewriting
 				$uri = substr($_SERVER['REQUEST_URI'], strlen(DEF_WEBPATH));
 				$uri = explode('?', $uri, 2);
 				$segments = explode('/', trim($uri[0], '/'), 3);
 				$this->_name_cache = array_pop($segments);
+			}
 				
-			}else{
-				
-				// try with 'page' HTTP parameter
+			// try with 'page' HTTP parameter
+			if(!$this->_name_cache){
 				if(isset($_GET['page']))
 					$this->_name_cache = $_GET['page'];
 				if(isset($_POST['page']))
 					$this->_name_cache = $_POST['page'];
-				
 			}
 			
 			// sanitize user input
@@ -132,11 +130,16 @@ class Page {
 	}
 	
 	/**
-	 * Renders a page's content.
+	 * Gets a page's content.
 	 * @param string $name Page name.
+	 * @return string Page content.
 	 */
-	public function render_content($name){
-		require(DEF_ABSPATH.DS.'pages'.DS.$name.'.php');
+	public function get_content($name){
+		if(!file_exists(DEF_ABSPATH.DS.'pages'.DS.$name.'.php'))
+			throw new ResourceNotFoundException('Could not load page named "'.$name.'".');
+		ob_start();
+		include(DEF_ABSPATH.DS.'pages'.DS.$name.'.php');
+		return ob_get_clean();
 	}
 	
 	/**
@@ -179,7 +182,7 @@ class Page {
 	public function render(){
 		// looks weird, but we get dependencies from body ...
 		$body = $this->_get_body();
-		
+
 		// ... therefore we render header/footer afterwards.
 		$head = $this->_get_header();
 		$foot = $this->_get_footer();
