@@ -20,7 +20,7 @@
 			</ul>
 			<p><a href="{ $platform_download_link }" id="dl_btn" class="download_btn"> </a></p>
 			<p class="small">{ $platform_download_for } 
-				<script>GetDlOSName();</script>
+				<script type="text/javascript">GetDlOSName();</script>
 				<noscript>| <a href="<?php echo Page()->get_url('downloads'); ?>">Other?</a></noscript>
 			</p>
 			<div id="dl_menu" class="dl_menu" style="display:none;">
@@ -52,7 +52,7 @@
 					<div class="columnn_inner">
 						<h2>What is Lazarus?</h2>
 						<p>Lazarus is a Delphi compatible cross-platform IDE for Rapid Application Development. It has variety of components ready for use and a graphical form designer to easily create complex graphical user interfaces.</p>
-						<p class="content_more small"><span><a href="{ $home_php_name }?page=about" class="btlink">Learn more...</a></span>
+						<p class="content_more small"><span><a href="<?php echo Page()->get_url('about'); ?>" class="btlink">Learn more...</a></span>
 							<span><a href="http://en.wikipedia.org/wiki/Lazarus_%28IDE%29">Wikipedia</a></span></p>
 					</div>
 				</div>
@@ -117,9 +117,9 @@
 											<div class="randproj_note">
 												<h2>Random Project</h2>
 												<p  class="content_more">from our 
-													<a href="http://wiki.freepascal.org/Lazarus_Application_Gallery">showcase</a>
-													.<br />
-													This is an example of what can be done with Lazarus</p>
+													<a href="http://wiki.freepascal.org/Lazarus_Application_Gallery">showcase</a>.<br />
+													This is an example of what can be done with Lazarus
+												</p>
 											</div>
 										</div></div>
 									<div class="column_wrap66"><div class="columnn_inner">
@@ -175,7 +175,7 @@
 									<li>Regular Releases</li>
 								</ul>
 							</div>
-							<p  class="contentboxmore small"><a href="{ $home_php_name }?page=features" >Learn more...</a></p>
+							<p  class="contentboxmore small"><a href="<?php echo Page()->get_url('features'); ?>" >Learn more...</a></p>
 						</div>
 					</div>
 
@@ -206,16 +206,36 @@
 
 				</div></div>
 			<div class="clear"></div>
-		</div></div>
-
-
+		</div>
+		
+	</div>
 
 	<div class="clear"></div>
+	
+	<div class="spacious_block">
+		<div style="width:100%;">
+			<?php foreach(Application()->get_config()->get_keys('menus.home') as $i => $section){ ?>
+				<div class="column_wrap25">
+					<div class="columnn_inner_w">
+						<div class="hblock2">
+							<h3><?php e_esc_html($section); ?></h3>
+							<?php echo Page()->get_menu("home.$section", 'lists'); ?>
+						</div>
+					</div>
+				</div>
+				<?php if(($i + 1) % 4 == 0){ ?>
+				<div class="clear"></div>
+		</div>
+	</div>
+	<div class="spacious_block">
+		<div style="width:100%;">
+				<?php } ?>
+			<?php } ?>
+			<div class="clear"></div>
+		</div>
+	</div>
 
-
-
-
-	<div class="spacious_block"><div style="width:100%;">
+	<!--div class="spacious_block"><div style="width:100%;">
 
 			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
 						<h3>Lazarus / <span>Free Pascal</span></h3>
@@ -244,20 +264,20 @@
 			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
 						<h3>Applications</h3>
 						<ul>
-							<li><a href="http://wiki.freepascal.org/Projects_using_Lazarus">Projects Using Lazarus</a></li>
-							<li><a href="http://wiki.freepascal.org/Lazarus_Application_Gallery">Apps created with Lazarus</a></li>
-							<li><a href="http://wiki.freepascal.org/FPC_Applications/Projects_Gallery">Apps created with Free Pascal</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Case_Studies">Case Studies</a></li>
+							<li><a href="">Projects Using Lazarus</a></li>
+							<li><a href="">Apps created with Lazarus</a></li>
+							<li><a href="">Apps created with Free Pascal</a></li>
+							<li><a href="">Case Studies</a></li>
 						</ul>
 					</div></div></div>
 
 			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
 						<h3>Download</h3>
 						<ul>
-							<li><a href="http://sourceforge.net/project/showfiles.php?group_id=89339">Stable Versions</a></li>
-							<li><a href="http://www.hu.freepascal.org/lazarus/">Daily Snapshots</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/index.php/Getting_Lazarus">Source code</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Getting_Lazarus#Lazarus_Distributions">Other Distributions</a></li>
+							<li><a href="">Stable Versions</a></li>
+							<li><a href="">Daily Snapshots</a></li>
+							<li><a href="">Source code</a></li>
+							<li><a href="">Other Distributions</a></li>
 						</ul>
 					</div></div></div>
 
@@ -268,25 +288,25 @@
 						<h3>Community</h3>
 						<ul>
 							<li><a href="{ $smf_home }">Forum</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/">Wiki</a></li>
-							<li><a href="http://bugs.freepascal.org/view_all_bug_page.php?project_id=1">Bugtracker</a></li>
-							<li><a href="http://www.lazarus.freepascal.org/index.php/page,9.html">IRC Channel</a></li>
-							<li><a href="http://lazarus-dev.blogspot.com/">Developer Blog</a></li>
-							<li><a href="http://lists.lazarus.freepascal.org/mailman/listinfo">Mailing Lists</a></li>
-							<li><a href="http://twitter.com/LazarusDev">Follow us on Twitter</a></li>
+							<li><a href="">Wiki</a></li>
+							<li><a href="">Bugtracker</a></li>
+							<li><a href="">IRC Channel</a></li>
+							<li><a href="">Developer Blog</a></li>
+							<li><a href="">Mailing Lists</a></li>
+							<li><a href="">Follow us on Twitter</a></li>
 						</ul>
 					</div></div></div>
 
 			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
 						<h3>Education</h3>
 						<ul>
-							<li><a href="http://wiki.freepascal.org/Lazarus_Documentation">Documentation</a></li>
-							<li><a href="http://wiki.freepascal.org/">Wiki</a></li>
-							<li><a href="http://wiki.freepascal.org/Pascal_and_Lazarus_Books_and_Magazines">Books and Journals</a></li>
-							<li><a href="http://lazarus-dev.blogspot.com/">Developer Blog</a></li>
-							<li><a href="http://www.lazarus.freepascal.org/index.php/page,21.html">In other languages</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Conferences_and_Events">Events</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Contests">Contests</a></li>
+							<li><a href="">Documentation</a></li>
+							<li><a href="">Wiki</a></li>
+							<li><a href="">Books and Journals</a></li>
+							<li><a href="">Developer Blog</a></li>
+							<li><a href="">In other languages</a></li>
+							<li><a href="">Events</a></li>
+							<li><a href="">Contests</a></li>
 						</ul>
 					</div>
 				</div>
@@ -298,12 +318,12 @@
 						<h3>Service</h3>
 						<ul>
 							<li><a href="{ $home_php_name }?page=contact">Contact Us</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/licensing">Legal Information</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Lazarus_wiki:Privacy_policy">Privacy Policy</a></li>
-							<li><a href="http://www.lazarus.freepascal.org/index.php/board,41.0.html">Open Positions</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Bounties">Bounties</a></li>
-							<li><a href="http://www.blaisepascal.eu/index.php?actie=./subscribers/lazarusbookinfoEnglish">The Lazarus Guide</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/How_to_donate_to_Lazarus">Donate</a></li>
+							<li><a href="">Legal Information</a></li>
+							<li><a href="">Privacy Policy</a></li>
+							<li><a href="">Open Positions</a></li>
+							<li><a href="">Bounties</a></li>
+							<li><a href="">The Lazarus Guide</a></li>
+							<li><a href="">Donate</a></li>
 						</ul>
 					</div>
 				</div>
@@ -311,5 +331,5 @@
 
 			<div class="clear"></div>
 		</div>
-	</div>
+	</div-->
 </div>

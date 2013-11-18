@@ -22,7 +22,10 @@ Requirements
 Todo List
 ---------
 
-- Go over all pages and fix links (pass wiki links through function etc)
+- Go over all pages and fix links
+- Add content/body to contact page
+- Fix/work on SMF integration including links in menu config
+- Convert image bullets (in home header) to real bullets (or something scalable)
 
 Links & Contact
 ---------------

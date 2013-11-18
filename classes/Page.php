@@ -231,10 +231,13 @@ class Page {
 	
 	/**
 	 * Renders menu by name.
-	 * @param string Menu name.
+	 * @param string $name Menu name.
+	 * @param string $mode Menu render mode:
+	 * links - List of links.
+	 * lists - Links inside unordered lists
 	 * @return string Menu html.
 	 */
-	public function get_menu($name){
+	public function get_menu($name, $mode = 'links'){
 		$cfg = $this->_app->get_config();
 		$html = '';
 		foreach($cfg->get_keys("menus.$name") as $i){
@@ -244,10 +247,15 @@ class Page {
 			$target = $cfg->get("menus.$name.$i.target");
 			if(substr($url, 0, 5) == 'page:')
 				$url = $this->get_url(substr($url, 5));
-			$html .= '<a '.($id ? 'id="'.$id.'" ' : '')
+			$link = '<a '.($id ? 'id="'.$id.'" ' : '')
 				.($target ? 'target="'.$target.'" ' : '')
 				.' href="'.esc_html($url).'">'.$text.'</a>';
+			if($mode == 'lists')
+				$link = "<li>$link</li>";
+			$html .= $link;
 		}
+		if($mode == 'lists')
+			$html = "<ul>$html</ul>";
 		return $html;
 	}
 	
