@@ -1,14 +1,5 @@
-Introduction
-------------
-
-This is a script which is written by me, Adnan Shameem (Sunny) for Lazarus Homepage. This was a mockup which gradually was coded to this script to work as a prototype. During the making of this project forum members helped me with suggestions and ideas. I am grateful to them.
-
-Hope to see Lazarus as one of the top IDEs of the world.
-
-
-License
--------
-
+<?php
+/*
 ----
 The Lazarus Homepage script is created by Adnan Shameem Sunny (Email: needadnan [at] gmail [dot] com Website: http://adnan360.blogspot.com http://lazplanet.blogspot.com)
 ----
@@ -20,19 +11,5 @@ The Lazarus Homepage script is created by Adnan Shameem Sunny (Email: needadnan 
 - The third party projects used in this project would retain their respective license.
 
 For further clarification of the license, please contact the author.
-
-
-Installation
-------------
-
-1. Just upload the index.php,images,include,pages,randproj,themes,tips.txt to a directory.
-
-2. chmod 777 the directory: include/cache
-Or refer to Template Lite documentation that refers to cache directory.
-
-3. Edit the include/config.php to meet your needs
-
-
-Contact and Assistance
-----------------------
-For any help please contact: needadnan [at] gmail [dot] com
+*/
+?>
