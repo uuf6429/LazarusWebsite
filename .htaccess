@@ -1,0 +1,62 @@
+
+# Enables URL rewriting
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-l
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule .* index.php [L,QSA]
+</IfModule>
+
+# Disallow access to some protected dirs
+# todo disallow direct requests to:
+# -classes
+# -data (do we need this anymore - can't we just use the config?)
+# -pages
+# todo disable directory listing
+
+################################
+#   Ultimate htaccess tweaks   #
+# (C) 2009 Christian Sciberras #
+################################
+ 
+# Security defaults
+ServerSignature Off
+ 
+# MIME hotfix for client-side recognition
+AddType application/x-font-opentype .otf
+AddType application/x-font-ttf .ttf
+AddType application/x-font-woff .woff
+AddType video/ogg  .ogv
+AddType video/mp4  .mp4
+AddType video/webm .webm
+AddType text/x-component .htc
+ 
+# Video hotfix to disable compression (so client-side can seek)
+SetEnvIfNoCase Request_URI \.(og[gv]|mp4|m4v|webm)$ no-gzip dont-vary
+ 
+# Set sane expiration
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresDefault "access plus 2 months"
+  <FilesMatch \.php$>
+    ExpiresActive Off
+  </FilesMatch>
+</IfModule>
+ 
+# Remove ETags (they're bad for our health)
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+ 
+# Compress most things except when browser sucks (Apache2 only)
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+#  SetEnvIfNoCase Request_URI \
+#    \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+#  Header append Vary User-Agent env=!dont-vary
+</IfModule>
