@@ -1,5 +1,5 @@
 <?php Page()->add_css('css/style.css', 'modified'); ?>
-<?php Page()->add_js('js/script.js', 'modified'); ?>
+
 <?php $content = Page()->get_content( Page()->get_name() ); ?>
 
 <div class="contentwrap">
@@ -8,3 +8,6 @@
 		<?php echo $content; ?>
 	</div>
 </div>
+
+<?php Page()->add_js('js/jquery-1.7.1.min.js', '1.7.1', false); ?>
+<?php Page()->add_js('js/script.js', 'modified', false); ?>

@@ -235,25 +235,38 @@ class Page {
 	 * @param string $mode Menu render mode:
 	 * links - List of links.
 	 * lists - Links inside unordered lists
+	 * @param string $text_field Text field name.
 	 * @return string Menu html.
 	 */
-	public function get_menu($name, $mode = 'links'){
+	public function get_menu($name, $mode = 'links', $text_field = 'text'){
 		$cfg = $this->_app->get_config();
 		$html = '';
+		
 		foreach($cfg->get_keys("menus.$name") as $i){
-			$id = $cfg->get("menus.$name.$i.id");
-			$url = $cfg->get("menus.$name.$i.url", '');
-			$text = $cfg->get("menus.$name.$i.text", '');
-			$target = $cfg->get("menus.$name.$i.target");
-			if(substr($url, 0, 5) == 'page:')
-				$url = $this->get_url(substr($url, 5));
-			$link = '<a '.($id ? 'id="'.$id.'" ' : '')
-				.($target ? 'target="'.$target.'" ' : '')
-				.' href="'.esc_html($url).'">'.$text.'</a>';
-			if($mode == 'lists')
-				$link = "<li>$link</li>";
-			$html .= $link;
+			
+			if($cfg->is_section("menus.$name.$i")){
+				// menu items
+				$id = $cfg->get("menus.$name.$i.id");
+				$url = $cfg->get("menus.$name.$i.url", '');
+				$text = $cfg->get("menus.$name.$i.$text_field", '');
+				$target = $cfg->get("menus.$name.$i.target");
+				if(substr($url, 0, 5) == 'page:')
+					$url = $this->get_url(substr($url, 5));
+				$item = '<a '.($id ? 'id="'.esc_html($id).'" ' : '')
+					.($target ? 'target="'.esc_html($target).'" ' : '')
+					.' href="'.esc_html($url).'">'.esc_html($text).'</a>';
+				if($mode == 'lists')
+					$item = "<li>$item</li>";
+			}else{
+				// separator
+				$item = '<hr/>';
+				if($mode == 'lists')
+					$item = "<li>$item</li>";
+			}
+			
+			$html .= $item;
 		}
+		
 		if($mode == 'lists')
 			$html = "<ul>$html</ul>";
 		return $html;
@@ -275,12 +288,14 @@ class Page {
 	 * Add javascript file to page.
 	 * @param string $file File path relative to theme.
 	 * @param string $version File version (use special value "modified" to use file modification date)
+	 * @param boolean $in_head Whether to render the script in the head (true) or before closing body (false).
 	 */
-	public function add_js($file, $version){
+	public function add_js($file, $version, $in_head = true){
 		if($version == 'modified')
 			$version = filemtime(DEF_ABSPATH.DS.'theme'.DS.str_replace('/', DS, $file));
 		$this->_js[] = array(
 			'src' => DEF_WEBPATH.'/theme/'.$file.'?v='.$version,
+			'in' => $in_head ? 'head' : 'body', 
 		);
 	}
 	
@@ -303,20 +318,27 @@ class Page {
 	 * Print page header stuff.
 	 */
 	public function do_header(){
-		while($css = array_pop($this->_css)){
-			echo '<link rel="stylesheet" href="'.esc_html($css['href']).'" media="'.$css['media'].'" />';
+		echo PHP_EOL;
+		while($css = array_shift($this->_css)){
+			echo '<link rel="stylesheet" href="'.esc_html($css['href']).'" media="'.$css['media'].'" />'.PHP_EOL;
 		}
-		while($js = array_pop($this->_js)){
-			echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>';
+		$rem_js = array();
+		while($js = array_shift($this->_js)){
+			if($js['in'] == 'body'){
+				$rem_js[] = $js;
+			}
+			echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>'.PHP_EOL;
 		}
+		$this->_js = $rem_js;
 	}
 	
 	/**
 	 * Print page footer stuff.
 	 */
 	public function do_footer(){
-		while($js = array_pop($this->_js)){
-			echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>';
+		echo PHP_EOL;
+		while($js = array_shift($this->_js)){
+			echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>'.PHP_EOL;
 		}
 	}
 }

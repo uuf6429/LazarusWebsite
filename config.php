@@ -2,6 +2,10 @@
 
 	return array(
 		
+		'sfbaseurl' => 'http://sourceforge.net/projects/lazarus/',
+		
+		'sfversionttl' => '1 hour',
+		
 		'deftitle' => 'Lazarus Homepage',
 		
 		'rewrite' => true,
@@ -74,6 +78,31 @@
 					array('url' => 'http://wiki.lazarus.freepascal.org/Bounties', 'text' => 'Bounties'),
 					array('url' => 'http://www.blaisepascal.eu/index.php?actie=./subscribers/lazarusbookinfoEnglish', 'text' => 'The Lazarus Guide'),
 					array('url' => 'http://wiki.lazarus.freepascal.org/How_to_donate_to_Lazarus', 'text' => 'Donate'),
+				),
+			),
+			
+			'download' => array(
+				'Windows' => array(
+					'' => array(
+						array('text' => 'Windows 32 Bits', 'desc' => 'Windows (32 Bits)', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Lazarus%20%LAZ_VERSION%/lazarus-%LAZ_VERSION%-fpc-%FPC_VERSION%-win32.exe/download'),
+						array('text' => 'Windows 64 Bits', 'desc' => 'Windows (64 Bits)', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%20%LAZ_VERSION%/lazarus-%LAZ_VERSION%-fpc-%FPC_VERSION%-win64.exe/download'),
+					),
+				),
+				'Linux' => array(
+					'DEB Releases' => array(
+						array('text' => 'Linux DEB 32 Bits', 'desc' => 'Lazarus Linux i386 DEB (32 Bits)', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20i386%20DEB/Lazarus%20%LAZ_VERSION%/'),
+						array('text' => 'Linux DEB 64 Bits', 'desc' => 'Lazarus Linux amd64 DEB (64 Bits)', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20amd64%20DEB/Lazarus%20%LAZ_VERSION%/'),
+					),
+					'RPM Releases' => array(
+						array('text' => 'Linux RPM 32 Bits', 'desc' => 'Lazarus Linux i386 RPM (32 Bits)', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20i386%20RPM/Lazarus%20%LAZ_VERSION%/'),
+						array('text' => 'Linux RPM 64 Bits', 'desc' => 'Lazarus Linux x86_64 RPM (64 Bits)', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20x86_64%20RPM/Lazarus%20%LAZ_VERSION%/'),
+					),
+				),
+				'Mac OS X' => array(
+					'' => array(
+						array('text' => 'Mac OS X 32 Bits', 'desc' => 'Lazarus Mac OS X i386 (32 Bits)', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Mac%20OS%20X%20i386/Lazarus%20%LAZ_VERSION%/'),
+						array('text' => 'Mac OS X Powerpc', 'desc' => 'Lazarus Mac OS X powerpc', 'url' => 'http://sourceforge.net/projects/lazarus/files/Lazarus%20Mac%20OS%20X%20powerpc/Lazarus%20%LAZ_VERSION%/'),
+					),
 				),
 			),
 			

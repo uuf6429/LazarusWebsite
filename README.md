@@ -26,6 +26,7 @@ Todo List
 - Add content/body to contact page
 - Fix/work on SMF integration including links in menu config
 - Convert image bullets (in home header) to real bullets (or something scalable)
+- Cleanup/recreate javascript
 
 Links & Contact
 ---------------

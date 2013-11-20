@@ -1,6 +1,4 @@
 <?php Page()->add_css('css/style.css', 'modified'); ?>
-<?php Page()->add_js('js/script.js', 'modified'); ?>
-<?php Page()->add_js('js/script_home.js', 'modified'); ?>
 
 <div class="slidewrap_bg">
 	<div class="slidewrap">
@@ -19,12 +17,13 @@
 				<li>Delphi converter</li>
 			</ul>
 			<p><a href="{ $platform_download_link }" id="dl_btn" class="download_btn"> </a></p>
-			<p class="small">{ $platform_download_for } 
-				<script type="text/javascript">GetDlOSName();</script>
-				<noscript>| <a href="<?php echo Page()->get_url('downloads'); ?>">Other?</a></noscript>
+			<p class="small">
+				{ $platform_download_for } 
+				| <a id="dl_menu_link" href="<?php echo Page()->get_url('downloads'); ?>">Other?</a>
 			</p>
-			<div id="dl_menu" class="dl_menu" style="display:none;">
-				<ul>
+			<div id="dl_menu" class="dl_menu" style="display: none;">
+				<?php echo Page()->get_menu('menus.download', 'lists'); ?>
+				<!--ul>
 					<li><a href="{ $dl_win32_url }">Windows 32 Bits</a></li>
 					<li><a href="{ $dl_win64_url }">Windows 64 Bits</a></li>
 					<hr />
@@ -37,7 +36,7 @@
 					<li><a href="{ $dl_macppc_url }">Mac OS X Powerpc</a></li>
 					<hr />
 					<li><a href="<?php echo Page()->get_url('downloads'); ?>">Other Downloads and mirrors</a></li>
-				</ul>
+				</ul-->
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -333,3 +332,6 @@
 		</div>
 	</div-->
 </div>
+
+<?php Page()->add_js('js/jquery-1.7.1.min.js', '1.7.1', false); ?>
+<?php Page()->add_js('js/script.js', 'modified', false); ?>

@@ -101,4 +101,12 @@
 			}
 			$temp = $value;
 		}
+		
+		/**
+		 * Returns whether specified path contains a section (array) or a single value.
+		 * @return boolean
+		 */
+		public function is_section($path){
+			return is_array($this->get($path));
+		}
 	}
