@@ -22,7 +22,7 @@
 				| <a id="dl_menu_link" href="<?php echo Page()->get_url('downloads'); ?>">Other?</a>
 			</p>
 			<div id="dl_menu" class="dl_menu" style="display: none;">
-				<?php echo Page()->get_menu('menus.download', 'lists'); ?>
+				<?php echo Page()->get_menu('download', 'lists'); ?>
 				<!--ul>
 					<li><a href="{ $dl_win32_url }">Windows 32 Bits</a></li>
 					<li><a href="{ $dl_win64_url }">Windows 64 Bits</a></li>
