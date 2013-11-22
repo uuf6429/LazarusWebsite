@@ -499,6 +499,7 @@ input[type=submit] {
 	font-weight:bold;
 	text-decoration:none;
 	padding:3px;
+	margin:0 2px;
 }
 
 .top_links a:hover {

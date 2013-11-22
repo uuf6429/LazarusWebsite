@@ -1,24 +1,20 @@
 
 jQuery(document).ready(function(){
 	
-	var locked = false;
-	
 	// home download menu
 	jQuery('#dl_menu_link').html('Other &#x25BC;')
-		.mousedown(function(){
-			locked = true;
-		})
-		.mouseup(function(){
-			jQuery('#dl_menu').stop(true, true).show();
-			locked = false;
-		}).click(function(e){
+		.click(function(e){
+			// do not navigate
 			e.preventDefault();
 			e.stopPropagation();
+			
+			// show menu
+			jQuery('#dl_menu').finish().show();
+			
+			// hide menu when document is clicked the next time
+			jQuery(document).one('click', function(){
+				jQuery('#dl_menu').fadeOut('fast');
+			});
 		});
-	
-	// hide menu
-	jQuery(document).mousedown(function(){
-		if (!locked) jQuery('#dl_menu').stop(true, true).fadeOut();
-	});
 	
 });

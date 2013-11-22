@@ -22,7 +22,7 @@ class SourceForgeHelper {
 	 */
 	protected function is_cached(){
 		return file_exists($this->get_cache()) &&
-			filectime($this->get_cache()) < strtotime($this->_cfg->get('sfversionttl'));
+			filectime($this->get_cache()) < strtotime($this->_cfg->get('sfversionttl', '+1 hour'));
 	}
 	
 	/**

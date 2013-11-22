@@ -9,5 +9,5 @@
 	</div>
 </div>
 
-<?php Page()->add_js('js/jquery-1.7.1.min.js', '1.7.1', false); ?>
+<?php Page()->add_js('js/jquery.min.js', '1.10.2', false); ?>
 <?php Page()->add_js('js/script.js', 'modified', false); ?>

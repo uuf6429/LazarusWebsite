@@ -19,9 +19,49 @@
 	 * Root path without final separator
 	 */
 	define('DEF_ABSPATH', dirname(__FILE__));
-
+	
+	// do not show errors (for security reasons)
+	ini_set('display_errors', false);
+	
 	// set the default timezone
 	date_default_timezone_set(DEF_TIMEZONE);
+	
+	/**
+	 * Fatal exception handler (this is mostly to handle catastrophic failures).
+	 */
+	function shutdown_handler(){
+		
+		$fatal_errors = array(E_COMPILE_ERROR, E_CORE_ERROR, E_ERROR, E_USER_ERROR);
+		$last = error_get_last();
+		
+		if($last && in_array($last['type'], $fatal_errors)){
+			// remove any open buffers
+			$max = 1000; // give up after these much tries
+			while(ob_get_level() && $max--)ob_end_clean();
+			
+			// set status header
+			if(!headers_sent())header('HTTP/1.1 500 Internal Server Error', true, 500);
+			
+			// write the error message
+			die('<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+				<html><head>
+					<title>500 Internal Server Error</title>
+				</head><body>
+					<h1>Internal Server Error</h1>
+					<p>The server encountered an internal error or
+					misconfiguration and was unable to complete
+					your request.</p>
+					<p>Please contact the server administrator,
+					 webmaster@'.$_SERVER['SERVER_NAME'].' and inform them of the time the error occurred,
+					and anything you might have done that may have
+					caused the error.</p>
+					<p>More information about this error may be available
+					in the server error log.</p>
+					<pre>'.$last['message'].' ('.basename($last['file']).':'.$last['line'].')</pre>
+				</body></html>');
+		}
+	}
+	register_shutdown_function('shutdown_handler');
 
 	/**
 	 * This is our class autoloader.

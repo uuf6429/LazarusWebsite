@@ -148,7 +148,7 @@ class Page {
 	protected function _get_part($path){
 		if(file_exists(DEF_ABSPATH.DS.$path)){
 			ob_start();
-			require(DEF_ABSPATH.DS.$path);
+			include(DEF_ABSPATH.DS.$path);
 			return ob_get_clean();
 		}else{
 			throw new ResourceNotFoundException('File "'.$path.'" could not be found');
@@ -177,6 +177,15 @@ class Page {
 	}
 	
 	/**
+	 * Cleans up any output buffers.
+	 */
+	protected function _clean_buffers(){
+		$max = 1000; // give up after these much tries
+		while(ob_get_level() && $max--)
+			ob_end_clean();
+	}
+	
+	/**
 	 * Renders the current page, from top to bottom.
 	 */
 	public function render(){
@@ -186,6 +195,9 @@ class Page {
 		// ... therefore we render header/footer afterwards.
 		$head = $this->_get_header();
 		$foot = $this->_get_footer();
+		
+		// remove any leaked content
+		$this->_clean_buffers();
 		
 		// ... and we're done ... clean up and return
 		$this->_rendered = true;
@@ -198,6 +210,7 @@ class Page {
 	public function render_soft_error(Exception $ex){
 		$this->_exception = $ex;
 		
+		// set up HTTP status header
 		if(!headers_sent() && $ex instanceof ServerException){
 			header($ex->getHeader(), true, $ex->getStatus());
 		}
@@ -209,24 +222,11 @@ class Page {
 	 * A "hard" error occurred. Clean up, give up and mail the admins.
 	 */
 	public function render_hard_error(Exception $ex1, Exception $ex2){
-		if(!headers_sent())header('HTTP/1.1 500 Internal Server Error', true, 500);
-		die('<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-			<html><head>
-				<title>500 Internal Server Error</title>
-			</head><body>
-				<h1>Internal Server Error</h1>
-				<p>The server encountered an internal error or
-				misconfiguration and was unable to complete
-				your request.</p>
-				<p>Please contact the server administrator,
-				 webmaster@'.$_SERVER['SERVER_NAME'].' and inform them of the time the error occurred,
-				and anything you might have done that may have
-				caused the error.</p>
-				<p>More information about this error may be available
-				in the server error log.</p>
-				<p>Fault 1: '.$ex1->getMessage().' ('.basename($ex1->getFile()).':'.$ex1->getLine().')<br/>
-				Fault 2: '.$ex2->getMessage().' ('.basename($ex2->getFile()).':'.$ex2->getLine().')</p>
-			</body></html>');
+		trigger_error(
+			"A system double fault occurred (an exception was thrown while handling another one).\r\n"
+			+ "Fault 1: ".$ex1->getMessage()." (".basename($ex1->getFile()).":".$ex1->getLine().")\r\n"
+			+ "Fault 2: ".$ex2->getMessage()." (".basename($ex2->getFile()).":".$ex2->getLine().")", E_USER_ERROR
+		);
 	}
 	
 	/**

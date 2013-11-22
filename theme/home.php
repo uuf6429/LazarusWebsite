@@ -1,4 +1,6 @@
 <?php Page()->add_css('css/style.css', 'modified'); ?>
+<?php $bs = new BrowserSniffer(); ?>
+<?php $cfg = Application()->get_config(); ?>
 
 <div class="slidewrap_bg">
 	<div class="slidewrap">
@@ -16,27 +18,23 @@
 				<li>Open source (GPL/LGPL)</li>
 				<li>Delphi converter</li>
 			</ul>
-			<p><a href="{ $platform_download_link }" id="dl_btn" class="download_btn"> </a></p>
+			<p><a href="<?php e_esc_html($cfg->get($bs->get_linkpath())); ?>" id="dl_btn" class="download_btn"> </a></p>
 			<p class="small">
-				{ $platform_download_for } 
-				| <a id="dl_menu_link" href="<?php echo Page()->get_url('downloads'); ?>">Other?</a>
+				<?php e_esc_html($bs->get_fullstring()); ?> |
+				<a id="dl_menu_link" href="<?php echo Page()->get_url('downloads'); ?>">Other?</a>
 			</p>
 			<div id="dl_menu" class="dl_menu" style="display: none;">
-				<?php echo Page()->get_menu('download', 'lists'); ?>
-				<!--ul>
-					<li><a href="{ $dl_win32_url }">Windows 32 Bits</a></li>
-					<li><a href="{ $dl_win64_url }">Windows 64 Bits</a></li>
-					<hr />
-					<li><a href="{ $dl_deb32_url }">Linux DEB 32 Bits</a></li>
-					<li><a href="{ $dl_deb64_url }">Linux DEB 64 Bits</a></li>
-					<li><a href="{ $dl_rpm32_url }">Linux RPM 32 Bits</a></li>
-					<li><a href="{ $dl_rpm64_url }">Linux RPM 64 Bits</a></li>
-					<hr />
-					<li><a href="{ $dl_mac32_url }">Mac OS X 32 Bits</a></li>
-					<li><a href="{ $dl_macppc_url }">Mac OS X Powerpc</a></li>
-					<hr />
-					<li><a href="<?php echo Page()->get_url('downloads'); ?>">Other Downloads and mirrors</a></li>
-				</ul-->
+				<ul><?php
+					foreach((array)$cfg->get('menus.download') as $main_items){
+						foreach($main_items as $sub_items){
+							foreach($sub_items as $item){
+								echo '<li><a href="'.esc_html($item['url']).'">'.$item['desc'].'</a></li>';
+							}
+						}
+						echo '<hr/>';
+					}
+					echo '<li><a href="'.Page()->get_url('downloads').'">Other Downloads and mirrors</a></li>';
+				?></ul>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -333,5 +331,5 @@
 	</div-->
 </div>
 
-<?php Page()->add_js('js/jquery-1.7.1.min.js', '1.7.1', false); ?>
+<?php Page()->add_js('js/jquery.min.js', '1.10.2', false); ?>
 <?php Page()->add_js('js/script.js', 'modified', false); ?>

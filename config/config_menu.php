@@ -1,15 +1,6 @@
 <?php
 
 	return array(
-		
-		'sfbaseurl' => 'http://sourceforge.net/projects/lazarus/',
-		
-		'sfversionttl' => '1 hour',
-		
-		'deftitle' => 'Lazarus Homepage',
-		
-		'rewrite' => true,
-		
 		'menus' => array(
 			
 			'header' => array(
