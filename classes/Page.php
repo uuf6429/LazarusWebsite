@@ -189,6 +189,9 @@ class Page {
 	 * Renders the current page, from top to bottom.
 	 */
 	public function render(){
+		$this->_js = array();
+		$this->_css = array();
+		
 		// looks weird, but we get dependencies from body ...
 		$body = $this->_get_body();
 
@@ -208,11 +211,58 @@ class Page {
 	 * A "soft" error occurred. Try to recover nicely.
 	 */
 	public function render_soft_error(Exception $ex){
+		$this->_js = array();
+		$this->_css = array();
 		$this->_exception = $ex;
 		
 		// set up HTTP status header
 		if(!headers_sent() && $ex instanceof ServerException){
-			header($ex->getHeader(), true, $ex->getStatus());
+			static $msgs = array(
+				100 => 'Continue',
+				101 => 'Switching Protocols',
+				200 => 'OK',
+				201 => 'Created',
+				202 => 'Accepted',
+				203 => 'Non-Authoritative Information',
+				204 => 'No Content',
+				205 => 'Reset Content',
+				206 => 'Partial Content',
+				300 => 'Multiple Choices',
+				301 => 'Moved Permanently',
+				302 => 'Found',  // 1.1
+				303 => 'See Other',
+				304 => 'Not Modified',
+				305 => 'Use Proxy',
+				307 => 'Temporary Redirect',
+				400 => 'Bad Request',
+				401 => 'Unauthorized',
+				402 => 'Payment Required',
+				403 => 'Forbidden',
+				404 => 'Not Found',
+				405 => 'Method Not Allowed',
+				406 => 'Not Acceptable',
+				407 => 'Proxy Authentication Required',
+				408 => 'Request Timeout',
+				409 => 'Conflict',
+				410 => 'Gone',
+				411 => 'Length Required',
+				412 => 'Precondition Failed',
+				413 => 'Request Entity Too Large',
+				414 => 'Request-URI Too Long',
+				415 => 'Unsupported Media Type',
+				416 => 'Requested Range Not Satisfiable',
+				417 => 'Expectation Failed',
+				500 => 'Internal Server Error',
+				501 => 'Not Implemented',
+				502 => 'Bad Gateway',
+				503 => 'Service Unavailable',
+				504 => 'Gateway Timeout',
+				505 => 'HTTP Version Not Supported',
+				509 => 'Bandwidth Limit Exceeded',
+			);
+			$code = $ex->getCode();
+			$mesg = $msgs[isset($msgs[$code]) ? $code : 500];
+			header("HTTP/1.1 $code $mesg", true, $code);
 		}
 		
 		echo $this->render();
@@ -222,6 +272,8 @@ class Page {
 	 * A "hard" error occurred. Clean up, give up and mail the admins.
 	 */
 	public function render_hard_error(Exception $ex1, Exception $ex2){
+		$this->_js = array();
+		$this->_css = array();
 		trigger_error(
 			"A system double fault occurred (an exception was thrown while handling another one).\r\n"
 			+ "Fault 1: ".$ex1->getMessage()." (".basename($ex1->getFile()).":".$ex1->getLine().")\r\n"
@@ -295,7 +347,7 @@ class Page {
 			$version = filemtime(DEF_ABSPATH.DS.'theme'.DS.str_replace('/', DS, $file));
 		$this->_js[] = array(
 			'src' => DEF_WEBPATH.'/theme/'.$file.'?v='.$version,
-			'in' => $in_head ? 'head' : 'body', 
+			'inh' => $in_head, 
 		);
 	}
 	
@@ -319,17 +371,14 @@ class Page {
 	 */
 	public function do_header(){
 		echo PHP_EOL;
-		while($css = array_shift($this->_css)){
+		$copy = $this->_css;
+		while($css = array_shift($copy)){
 			echo '<link rel="stylesheet" href="'.esc_html($css['href']).'" media="'.$css['media'].'" />'.PHP_EOL;
 		}
-		$rem_js = array();
-		while($js = array_shift($this->_js)){
-			if($js['in'] == 'body'){
-				$rem_js[] = $js;
-			}
-			echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>'.PHP_EOL;
-		}
-		$this->_js = $rem_js;
+		$copy = $this->_js;
+		while($js = array_shift($copy))
+			if($js['inh'])
+				echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>'.PHP_EOL;
 	}
 	
 	/**
@@ -337,9 +386,10 @@ class Page {
 	 */
 	public function do_footer(){
 		echo PHP_EOL;
-		while($js = array_shift($this->_js)){
-			echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>'.PHP_EOL;
-		}
+		$copy = $this->_js;
+		while($js = array_shift($copy))
+			if(!$js['inh'])
+				echo '<script type="text/javascript" src="'.esc_html($js['src']).'"></script>'.PHP_EOL;
 	}
 }
 

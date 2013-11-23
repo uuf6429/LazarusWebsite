@@ -9,6 +9,13 @@
 			</div>
 
 		</div>
+		
+		<?php if(Application()->get_config()->get('debug')){ ?>
+			<div id="debug_bar">
+				<div class="left">DEBUG ENABLED</div>
+				<div class="right"><?php Chronometer()->take_sample(); echo Chronometer()->toString(); ?></div>
+			</div>
+		<?php } ?>
 
 	</body>
 </html>

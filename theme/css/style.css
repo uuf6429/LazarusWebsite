@@ -604,4 +604,46 @@ a.download_btn {
 	color:#000;
 }
 
+.error_debug_trace table {
+	margin-top: 2px;
+}
 
+.error_debug_trace th {
+	text-align: left;
+	font-size: 13px;
+	border-bottom: 1px dotted #FCC;
+	padding: 4px;
+}
+
+.error_debug_trace td {
+	font-family: Consolas, "Lucida Console", "Courier New";
+	font-size: 13px;
+	padding: 0 4px;
+}
+
+.nice_r_a {
+	font-family: Arial;
+}
+
+#debug_bar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #FFC;
+	border-top: 2px solid #BB2;
+}
+
+#debug_bar .left {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background: #FF9;
+	padding: 8px;
+}
+
+#debug_bar .right {
+	margin-left: 100px;
+	padding: 8px;
+}

@@ -1,10 +1,8 @@
 <?php
 
-class InternalServerErrorException extends ServerException {
-	public function getStatus(){
-		return 500;
-	}
-	public function getHeader(){
-		return 'HTTP/1.1 500 Internal Server Error';
+class InternalServerErrorException extends AbstractServerException {
+	public function __construct($message = "", $code = 0, $previous = NULL){
+		$this->internal_code = $code;
+		parent::__construct($message, 500, $previous);
 	}
 }
