@@ -12,6 +12,7 @@
 	// instantiate classes
 	$evp = new EnvVarProvider();
 	$cfg = new Config($evp);
+	$erp = new ErrorReporter($cfg);
 	$sfc = new SourceForgeHelper($cfg);
 	
 	// set up virtual environment variables
@@ -25,6 +26,6 @@
 	$cfg->load_multi(glob(DEF_ABSPATH.DS.'config'.DS.'config*.*'), $evp);
 	
 	// load and run application
-	$app = new Application($cfg);
+	$app = new Application($cfg, $erp);
 	$app->run();
 

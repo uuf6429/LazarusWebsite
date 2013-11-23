@@ -35,6 +35,7 @@
 		$last = error_get_last();
 		
 		if($last && in_array($last['type'], $fatal_errors)){
+
 			// remove any open buffers
 			$max = 1000; // give up after these much tries
 			while(ob_get_level() && $max--)ob_end_clean();
@@ -59,6 +60,7 @@
 					in the server error log.</p>
 					<pre>'.$last['message'].' ('.basename($last['file']).':'.$last['line'].')</pre>
 				</body></html>');
+			
 		}
 	}
 	register_shutdown_function('shutdown_handler');

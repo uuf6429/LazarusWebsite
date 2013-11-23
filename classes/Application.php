@@ -1,15 +1,22 @@
 <?php
 
 class Application {
+	protected $_reporter;
 	protected $_config;
 	protected $_page;
 	
 	protected static $_current;
 	
-	public function __construct(Config $config){
+	/**
+	 * Initialize a new Application instance.
+	 * @param Config $config
+	 * @param ErrorReporter $reporter
+	 */
+	public function __construct(Config $config, ErrorReporter $reporter){
 		self::$_current = $this;
 		
 		$this->_config = $config;
+		$this->_reporter = $reporter;
 		$this->_page = new Page($this);
 		$this->_page->set_title($config->get('deftitle', 'Untitled'));
 	}
@@ -46,12 +53,14 @@ class Application {
 		}catch(Exception $ex1){
 			try{
 				
-				// soft failure: display nice message and quite
+				// soft failure: display nice message and quit
+				$this->_reporter->report($ex1);
 				$this->get_page()->render_soft_error($ex1);
 				
 			}catch(Exception $ex2){
 				
 				// hard failure...something is seriously wrong
+				$this->_reporter->report($ex2);
 				$this->get_page()->render_hard_error($ex1, $ex2);
 				
 			}

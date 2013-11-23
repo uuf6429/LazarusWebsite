@@ -28,6 +28,7 @@ Todo List
 - Convert image bullets (in home header) to real bullets (or something scalable)
 - Change menu functionality so one can provide menu items (used for downloads menu)
 - Using CSS Media Queries, create a mobile-friendly stylesheet
+- Add email-based error reporter (similar to the one I'm already using)
 
 Links & Contact
 ---------------

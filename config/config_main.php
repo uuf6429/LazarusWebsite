@@ -14,7 +14,4 @@
 		// Enable URL rewriting or not
 		'rewrite' => true,
 		
-		// Enables or disables debug mode
-		'debug' => true,
-		
 	);
