@@ -25,7 +25,7 @@
 	$evp->add_call('FPC_VERSION', array($sfc, 'get_fpc_version'));
 	
 	// load config
-	$cfg->load_multi(glob(DEF_ABSPATH.DS.'config'.DS.'config*.*'), $evp);
+	$cfg->load_multi(glob(DEF_ABSPATH.DS.'config'.DS.'config*.*', GLOB_NOSORT), $evp);
 	
 	// load and run application
 	$app = new Application($cfg, $erp);

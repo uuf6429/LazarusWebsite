@@ -22,13 +22,11 @@ Requirements
 Todo List
 ---------
 
-- Go over all pages and fix links
 - Add content/body to contact page
 - Fix/work on SMF integration including links in menu config
 - Convert image bullets (in home header) to real bullets (or something scalable)
 - Change menu functionality so one can provide menu items (used for downloads menu)
 - Using CSS Media Queries, create a mobile-friendly stylesheet
-- Add email-based error reporter (similar to the one I'm already using)
 
 Links & Contact
 ---------------
