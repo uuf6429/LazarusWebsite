@@ -18,7 +18,7 @@ p {
 	font-size:1.5em;
 	margin-top:5px;
 	margin-bottom:10px;
-	white-space:wrap;
+	white-space:normal;
 }
 
 .small {
@@ -340,6 +340,7 @@ a.btlink:hover {
 .randproj img {
 	float:left;
 	padding-right:20px;
+	height:70px;
 }
 .randproj h2 {
 	margin:0px 0 5px 0;
@@ -627,11 +628,32 @@ a.download_btn {
 
 #debug_bar {
 	position: fixed;
+	top: 0;
 	left: 0;
 	right: 0;
-	bottom: 0;
 	background: #FFC;
-	border-top: 2px solid #BB2;
+	border-bottom: 2px solid #BB2;
+	z-index: 10000;
+	opacity: 0.8;
+}
+
+#debug_bar:hover {
+	opacity: 1;
+}
+
+#debug_bar .close {
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+	position: absolute;
+	color: #FFF;
+	background: #F66;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	top: 4px;
+	left: 4px;
+	line-height: 17px;
 }
 
 #debug_bar .left {
@@ -640,10 +662,12 @@ a.download_btn {
 	left: 0;
 	bottom: 0;
 	background: #FF9;
-	padding: 8px;
+	padding: 8px 8px 8px 30px;
+	cursor: default;
 }
 
 #debug_bar .right {
-	margin-left: 100px;
+	margin-left: 118px;
 	padding: 8px;
+	cursor: default;
 }

@@ -44,7 +44,7 @@
 			if(!headers_sent())header('HTTP/1.1 500 Internal Server Error', true, 500);
 			
 			// write the error message
-			die('<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+			echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 				<html><head>
 					<title>500 Internal Server Error</title>
 				</head><body>
@@ -54,13 +54,13 @@
 					your request.</p>
 					<p>Please contact the server administrator,
 					 webmaster@'.$_SERVER['SERVER_NAME'].' and inform them of the time the error occurred,
-					and anything you might have done that may have
-					caused the error.</p>
-					<p>More information about this error may be available
-					in the server error log.</p>
-					<pre>'.$last['message'].' ('.basename($last['file']).':'.$last['line'].')</pre>
-				</body></html>');
-			
+					and anything you might have done that may have caused the error.</p>
+					<p>More information about this error may be available in the server error log.</p>';
+			if(Application()->get_config()->get('debug', false)){
+				echo '<pre>'.$last['message'].' ('.basename($last['file']).':'.$last['line'].')</pre>';
+			}
+			echo '</body></html>';
+			die;
 		}
 	}
 	register_shutdown_function('shutdown_handler');

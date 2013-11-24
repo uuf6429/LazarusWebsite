@@ -80,10 +80,7 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
+	
 	<div class="table_wrap">
 		<div style="width:100%;">
 			<div class="column_wrap66"><div class="columnn_inner">
@@ -104,33 +101,38 @@
 							<p class="contentboxmore small"><a href="{ $smf_index }/board,{ $smf_announcements_board }.0.html" >More Announcements...</a></p>
 						</div>
 					</div>
-
-
-
+					
 					<div class="contentsection">
 						<div class="contentbox contentbox_grey randproj">
 							<div class="table_wrap"><div style="width:100%;">
-									<div class="column_wrap33"><div class="columnn_inner">
+									<div class="column_wrap33">
+										<div class="columnn_inner">
 											<div class="randproj_note">
 												<h2>Random Project</h2>
-												<p  class="content_more">from our 
+												<p class="content_more">from our 
 													<a href="http://wiki.freepascal.org/Lazarus_Application_Gallery">showcase</a>.<br />
 													This is an example of what can be done with Lazarus
 												</p>
 											</div>
-										</div></div>
-									<div class="column_wrap66"><div class="columnn_inner">
+										</div>
+									</div>
+									<div class="column_wrap66">
+										<div class="columnn_inner">
 											<p class="randproj_text">
-												<img src="randproj/{ $rand_proj_img }" alt="{ $rand_proj_title }" title="{ $rand_proj_title }" height="70" />
-												{ $rand_proj_desc }
-
-												<span class="content_more" style="float:right;margin-left:10px;" >
-													<a href="{ $rand_proj_link }" >Visit project homepage</a>
+												<?php $rid = array_rand($cfg->get_keys('projects'), 1); ?>
+												<img src="<?php e_esc_html($cfg->get("projects.$rid.img")); ?>"
+													 alt="<?php e_esc_html($cfg->get("projects.$rid.ttl")); ?>"
+													 title="<?php e_esc_html($cfg->get("projects.$rid.ttl")); ?>" />
+												<?php echo $cfg->get("projects.$rid.txt"); ?>
+												<span class="content_more" style="float:right; margin-left:10px;" >
+													<a href="<?php e_esc_html($cfg->get("projects.$rid.url")); ?>" >Visit project homepage</a>
 												</span>
 											</p>
-										</div></div>
+										</div>
+									</div>
 									<div class="clear"></div>
-								</div><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -139,51 +141,54 @@
 
 					<div class="contentsection">
 						<div class="contentbox contentbox_grey tipofday">
-							<div class="table_wrap"><div style="width:100%;">
-									<div class="column_wrap33"><div class="columnn_inner">
+							<div class="table_wrap">
+								<div style="width:100%;">
+									<?php $rid = array_rand($cfg->get_keys('tips'), 1); ?>
+									<div class="column_wrap33">
+										<div class="columnn_inner">
 											<h2><strong>Tip of the day: </strong></h2>
-											<p>{ $tip_of_the_day_desc }</p>
-										</div></div>
-									<div class="column_wrap66"><div class="columnn_inner">
-											<img width="100%" src="{ $tip_of_the_day_img }"</img>
-										</div></div>
+											<p><?php echo $cfg->get("tips.$rid.txt"); ?></p>
+										</div>
+									</div>
+									<div class="column_wrap66">
+										<div class="columnn_inner">
+											<img src="<?php e_esc_html($cfg->get("tips.$rid.img")); ?>" alt=""/>
+										</div>
+									</div>
 									<div class="clear"></div>
-								</div><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
 							</div>
 						</div>
 					</div>
 
-				</div></div>
+				</div>
+			</div>
 
-			<div class="column_wrap33"><div class="columnn_inner">
+			<div class="column_wrap33">
+				<div class="columnn_inner">
 
 					<div class="contentsection">
 						<div class="contentbox" >
 							<h2 class="contentbox_h2">Highlights</h2>
 							<div class="contentbox_white contentfeed_bullets" >
 								<ul>
-									<li>Open Source</li>
-									<li>Written in Pascal for Pascal</li>
-									<li>Cross-platform</li>
-									<li>Over 200 Components</li>
-									<li>Many Frameworks</li>
-									<li>Extendable through packages</li>
-									<li>Converts from Delphi code</li>
-									<li>Regular Releases</li>
+									<?php foreach($cfg->get('highlights') as $item){ ?>
+										<li><?php echo $item; ?></li>
+									<?php } ?>
 								</ul>
 							</div>
 							<p  class="contentboxmore small"><a href="<?php echo Page()->get_url('features'); ?>" >Learn more...</a></p>
 						</div>
 					</div>
 
-
-
 					<div class="contentsection">
 						<div class="contentbox" >
 							<h2 class="contentbox_h2">Recent Forum Posts</h2>
 							<div class="contentbox_white" >
 								{ for start=0 stop=8 step=1 value=i }
-								<div class="contentfeed_small_item"><a href="{ $recent_posts_array[$i].href }" title="{ $recent_posts_array[$i].subject }">
+								<div class="contentfeed_small_item">
+									<a href="{ $recent_posts_array[$i].href }" title="{ $recent_posts_array[$i].subject }">
 										<div>
 											<p {if $recent_posts_array[$i].new eq "True"}class="new"{/if}>
 												<strong>{ $recent_posts_array[$i].short_subject }</strong><br />
@@ -193,7 +198,8 @@
 												<span>({ $recent_posts_array[$i].time })</span>
 											</p>
 										</div>
-									</a></div>
+									</a>
+								</div>
 								{ /for }
 							</div>
 							<p  class="contentboxmore small"><a href="{ $smf_home }" >See all posts...</a></p>
@@ -232,103 +238,6 @@
 		</div>
 	</div>
 
-	<!--div class="spacious_block"><div style="width:100%;">
-
-			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
-						<h3>Lazarus / <span>Free Pascal</span></h3>
-						<ul>
-							<li><a href="{ $home_php_name }?page=features">Features</a></li>
-							<li><a href="{ $home_php_name }?page=whyuse">Why use it?</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Lazarus_1.0_fixes_branch">What's New</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Screenshots">Screenshots</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Roadmap">Roadmap</a></li>
-							<li><a href="http://wiki.freepascal.org/Lazarus_Faq">FAQ</a></li>
-						</ul>
-					</div></div></div>
-
-			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
-						<h3>Platforms</h3>
-						<ul>
-							<li><a href="http://wiki.lazarus.freepascal.org/Portal:Android">Android Development</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Portal:Linux">Lazarus for Linux</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Portal:Mac">Lazarus for Mac OS X</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Portal:iOS">Lazarus for iOS</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Portal:Windows">Lazarus for Windows</a></li>
-							<li><a href="http://wiki.lazarus.freepascal.org/Portal:Web_Development">Lazarus for Web</a></li>
-						</ul>
-					</div></div></div>
-
-			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
-						<h3>Applications</h3>
-						<ul>
-							<li><a href="">Projects Using Lazarus</a></li>
-							<li><a href="">Apps created with Lazarus</a></li>
-							<li><a href="">Apps created with Free Pascal</a></li>
-							<li><a href="">Case Studies</a></li>
-						</ul>
-					</div></div></div>
-
-			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
-						<h3>Download</h3>
-						<ul>
-							<li><a href="">Stable Versions</a></li>
-							<li><a href="">Daily Snapshots</a></li>
-							<li><a href="">Source code</a></li>
-							<li><a href="">Other Distributions</a></li>
-						</ul>
-					</div></div></div>
-
-			<div class="clear"></div>
-		</div></div>
-	<div class="spacious_block"><div style="width:100%;">
-			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
-						<h3>Community</h3>
-						<ul>
-							<li><a href="{ $smf_home }">Forum</a></li>
-							<li><a href="">Wiki</a></li>
-							<li><a href="">Bugtracker</a></li>
-							<li><a href="">IRC Channel</a></li>
-							<li><a href="">Developer Blog</a></li>
-							<li><a href="">Mailing Lists</a></li>
-							<li><a href="">Follow us on Twitter</a></li>
-						</ul>
-					</div></div></div>
-
-			<div class="column_wrap25"><div class="columnn_inner_w"><div class="hblock2">
-						<h3>Education</h3>
-						<ul>
-							<li><a href="">Documentation</a></li>
-							<li><a href="">Wiki</a></li>
-							<li><a href="">Books and Journals</a></li>
-							<li><a href="">Developer Blog</a></li>
-							<li><a href="">In other languages</a></li>
-							<li><a href="">Events</a></li>
-							<li><a href="">Contests</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="column_wrap25">
-				<div class="columnn_inner_w">
-					<div class="hblock2">
-						<h3>Service</h3>
-						<ul>
-							<li><a href="{ $home_php_name }?page=contact">Contact Us</a></li>
-							<li><a href="">Legal Information</a></li>
-							<li><a href="">Privacy Policy</a></li>
-							<li><a href="">Open Positions</a></li>
-							<li><a href="">Bounties</a></li>
-							<li><a href="">The Lazarus Guide</a></li>
-							<li><a href="">Donate</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="clear"></div>
-		</div>
-	</div-->
 </div>
 
 <?php Page()->add_js('js/jquery.min.js', '1.10.2', false); ?>

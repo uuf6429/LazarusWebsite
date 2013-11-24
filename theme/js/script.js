@@ -17,4 +17,9 @@ jQuery(document).ready(function(){
 			});
 		});
 	
+	// hide debug bar
+	jQuery('#debug_bar a.close').click(function(){
+		jQuery('#debug_bar').hide();
+	});
+	
 });
