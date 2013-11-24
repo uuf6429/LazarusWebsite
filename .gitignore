@@ -1,2 +1,3 @@
 nbproject
-/cache/sfh_versions.php
+/cache/*.php
+/cache/*.xml

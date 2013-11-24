@@ -17,6 +17,8 @@
 	
 	// set up virtual environment variables
 	$evp->add_value('DS', DS);
+	$evp->add_value('ABSPATH', DEF_ABSPATH);
+	$evp->add_value('WEBPATH', DEF_WEBPATH);
 	$evp->add_value('UPLOADS_URL', DEF_WEBPATH.'/uploads');
 	$evp->add_value('UPLOADS_DIR', DEF_ABSPATH.DS.'uploads');
 	$evp->add_call('LAZ_VERSION', array($sfc, 'get_laz_version'));

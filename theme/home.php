@@ -1,6 +1,8 @@
 <?php Page()->add_css('css/style.css', 'modified'); ?>
 <?php $bs = new BrowserSniffer(); ?>
 <?php $cfg = Application()->get_config(); ?>
+<?php $smf = new SimpleMachinesForumHelper($cfg, true); ?>
+<?php $annurl = $cfg->get('smf.index').'/board,'.$cfg->get('smf.board_announcements').'.0.html'; ?>
 
 <div class="slidewrap_bg">
 	<div class="slidewrap">
@@ -88,17 +90,19 @@
 						<div class="contentbox">
 							<h2 class="contentbox_h2">Recent Announcements</h2>
 							<div class="contentbox_white contentfeed">
-								{ for start=0 stop=4 step=1 value=i }
-								<a href="{ $recent_annc_array[$i].href }"><div class="contentfeed_item">
-										<h2>{ $recent_annc_array[$i].subject } - { $recent_annc_array[$i].time }</h2>
-										<div class="indent">
-											<p style="display: inline;"> { $recent_annc_array[$i].preview } </p>
-											<span class="small contentfeed_more" > Learn more...</span>
+								<?php foreach($smf->get_announcements() as $item){ ?>
+									<a href="<?php e_esc_html($item->href) ?>">
+										<div class="contentfeed_item">
+											<h2><?php e_esc_html(trim($item->subject, '.')); ?> &mdash; <?php e_esc_html($item->time); ?></h2>
+											<div class="indent">
+												<p style="display: inline;"> <?php echo str_replace('...', '&hellip;', esc_html($item->preview)); ?> </p>
+												<span class="small contentfeed_more">Learn more&hellip;</span>
+											</div>
 										</div>
-									</div></a>
-								{ /for }
+									</a>
+								<?php } ?>
 							</div>
-							<p class="contentboxmore small"><a href="{ $smf_index }/board,{ $smf_announcements_board }.0.html" >More Announcements...</a></p>
+							<p class="contentboxmore small"><a href="<?php e_esc_html($annurl); ?>">More Announcements&hellip;</a></p>
 						</div>
 					</div>
 					
@@ -178,7 +182,7 @@
 									<?php } ?>
 								</ul>
 							</div>
-							<p  class="contentboxmore small"><a href="<?php echo Page()->get_url('features'); ?>" >Learn more...</a></p>
+							<p  class="contentboxmore small"><a href="<?php echo Page()->get_url('features'); ?>" >Learn more&hellip;</a></p>
 						</div>
 					</div>
 
@@ -186,23 +190,23 @@
 						<div class="contentbox" >
 							<h2 class="contentbox_h2">Recent Forum Posts</h2>
 							<div class="contentbox_white" >
-								{ for start=0 stop=8 step=1 value=i }
-								<div class="contentfeed_small_item">
-									<a href="{ $recent_posts_array[$i].href }" title="{ $recent_posts_array[$i].subject }">
-										<div>
-											<p {if $recent_posts_array[$i].new eq "True"}class="new"{/if}>
-												<strong>{ $recent_posts_array[$i].short_subject }</strong><br />
-											</p>
-											<p class="contentfeed_small_light small">
-												<span>by { $recent_posts_array[$i].poster.name }</span>
-												<span>({ $recent_posts_array[$i].time })</span>
-											</p>
-										</div>
-									</a>
-								</div>
-								{ /for }
+								<?php foreach($smf->get_recent_posts() as $item){ ?>
+									<div class="contentfeed_small_item">
+										<a href="<?php e_esc_html($item->href); ?>" title="<?php e_esc_html($item->subject); ?>">
+											<div>
+												<p <?php if($item->new)echo 'class="new"'; ?>>
+													<strong><?php echo str_replace('...', '&hellip;', esc_html($item->short_subject)); ?></strong><br />
+												</p>
+												<p class="contentfeed_small_light small">
+													<span>by <?php e_esc_html($item->poster_name); ?></span>
+													<span>(<?php e_esc_html($item->time); ?>)</span>
+												</p>
+											</div>
+										</a>
+									</div>
+								<?php } ?>
 							</div>
-							<p  class="contentboxmore small"><a href="{ $smf_home }" >See all posts...</a></p>
+							<p  class="contentboxmore small"><a href="<?php e_esc_html($cfg->get('smf.home')); ?>" >See all posts&hellip;</a></p>
 						</div>
 					</div>
 
