@@ -24,6 +24,10 @@ Todo List
 
 - Add content/body to contact page
 - Convert image bullets (in home header) to real bullets (or something scalable)
+- Fix slider background (switch to png especially the sloping strip, because of jpg mismatch)
+- Slider doesn't look great on mobile site, do something about it
+- Do some real cross-browser checks
+- Ask around for inspiration on more features
 
 Links & Contact
 ---------------

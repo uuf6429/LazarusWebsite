@@ -51,8 +51,15 @@ class SourceForgeHelper {
 		static $cached = null;
 		
 		if(!$cached){
-			if (!$this->is_cached()) $this->update_cache();
-			$cached = (object)include($this->get_cache());
+			
+			if($this->_cfg->get('sfversion') == 'auto'){
+				// get version from sourceforge/cache
+				if (!$this->is_cached()) $this->update_cache();
+				$cached = (object)include($this->get_cache());
+			}else{
+				// use predefined version from config
+				$cached = (object)$this->_cfg->get('sfversion');
+			}
 		}
 		
 		return $cached;
