@@ -22,4 +22,11 @@ jQuery(document).ready(function(){
 		jQuery('#debug_bar').hide();
 	});
 	
+	// toggle header menu
+	jQuery('#top_links_link').click(function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		jQuery('#top_links_menu').toggle();
+	});
+	
 });

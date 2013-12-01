@@ -25,7 +25,8 @@
 					<div class="top_logo">
 						<a class="top_logo_link" href="<?php e_esc_html(Page()->get_url('')); ?>" title="Lazarus"> </a>
 					</div>
-					<div class="top_links">
+					<a class="top_links_toggle" id="top_links_link" href="javascript:;"><span>&equiv;</span></a>
+					<div class="top_links" id="top_links_menu">
 						<?php echo Page()->get_menu('header'); ?>
 					</div>
 					<div class="clear"></div>

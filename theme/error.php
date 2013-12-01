@@ -1,5 +1,6 @@
 <?php Page()->add_css('css/nice_r.css', '2.0'); ?>
 <?php Page()->add_css('css/style.css', 'modified'); ?>
+<?php Page()->add_css('css/mobile.css', 'modified', '(max-width: 640px)'); ?>
 
 <?php Page()->set_title('Error!!1'); ?>
 

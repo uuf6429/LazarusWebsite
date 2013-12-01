@@ -5,10 +5,10 @@
 <div class="contentsection">
 
 	<div class="table_wrap">
-		<div style="width:100%; overflow-y:hidden;">
+		<div style="overflow-y:hidden;">
 
 			<div class="column_wrap33">
-				<div class="columnn_inner">
+				<div class="column_inner">
 					<div class="contentbox long_borders">
 						<h2 class="contentbox_h2">Freedom</h2>
 						<div class="contentbox_white contentfeed_bullets">
@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="column_wrap33">
-				<div class="columnn_inner">
+				<div class="column_inner">
 					<div class="contentbox long_borders">
 						<h2  class="contentbox_h2">Ease of use</h2>
 						<div class="contentbox_white contentfeed_bullets">
@@ -44,7 +44,7 @@
 			</div>
 
 			<div class="column_wrap33">
-				<div class="columnn_inner">
+				<div class="column_inner">
 					<div class="contentbox long_borders">
 						<h2  class="contentbox_h2">Extensibility</h2>
 						<div class="contentbox_white contentfeed_bullets">
@@ -68,19 +68,19 @@
 	</div>
 
 	<div class="table_wrap">
-		<div style="width:100%;">
+		<div>
 			<div class="column_wrap33">
-				<div class="columnn_inner">
+				<div class="column_inner">
 					<div class="contentbox end_borders"></div>
 				</div>
 			</div>
 			<div class="column_wrap33">
-				<div class="columnn_inner">
+				<div class="column_inner">
 					<div class="contentbox end_borders"></div>
 				</div>
 			</div>
 			<div class="column_wrap33">
-				<div class="columnn_inner">
+				<div class="column_inner">
 					<div class="contentbox end_borders"></div>
 				</div>
 			</div>

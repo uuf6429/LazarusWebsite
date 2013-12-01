@@ -26,7 +26,7 @@
 		 * Construct a new instance, optionally with a Config object.
 		 * @param Config $cfg (Optional) Object to read settings from.
 		 */
-		public function __construct($cfg = null){
+		public function __construct(Config $cfg = null){
 			$this->config = $cfg;
 		}
 		

@@ -1,4 +1,5 @@
 <?php Page()->add_css('css/style.css', 'modified'); ?>
+<?php Page()->add_css('css/mobile.css', 'modified', '(max-width: 640px)'); ?>
 
 <?php $content = Page()->get_content( Page()->get_name() ); ?>
 
