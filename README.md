@@ -22,7 +22,6 @@ Requirements
 Todo List
 ---------
 
-- Add ./theme/js/jquery-1.10.2.min.map
 - Add content/body to contact page
 - Convert image bullets (in home header) to real bullets (or something scalable)
 
