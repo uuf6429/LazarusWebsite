@@ -14,4 +14,10 @@
 		// Enable URL rewriting or not
 		'rewrite' => true,
 		
+		// Disallow access to these paths
+		'forbidden' => array(
+			'/classes',
+			'/config',
+			'/pages'
+		),
 	);

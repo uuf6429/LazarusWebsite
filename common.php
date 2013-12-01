@@ -48,7 +48,7 @@
 				<html><head>
 					<title>500 Internal Server Error</title>
 				</head><body>
-					<h1>Internal Server Error</h1>
+					<h1>Catastrophic Failure</h1>
 					<p>The server encountered an internal error or
 					misconfiguration and was unable to complete
 					your request.</p>
@@ -56,7 +56,7 @@
 					 webmaster@'.$_SERVER['SERVER_NAME'].' and inform them of the time the error occurred,
 					and anything you might have done that may have caused the error.</p>
 					<p>More information about this error may be available in the server error log.</p>';
-			if(Application()->get_config()->get('debug', false)){
+			if(function_exists('Application') && Application()->get_config()->get('debug', false)){
 				echo '<pre>'.$last['message'].' ('.basename($last['file']).':'.$last['line'].')</pre>';
 			}
 			echo '</body></html>';

@@ -1,4 +1,3 @@
-
 # Enables URL rewriting
 <IfModule mod_rewrite.c>
 	RewriteEngine On
@@ -8,12 +7,10 @@
 	RewriteRule .* index.php [L,QSA]
 </IfModule>
 
-# Disallow access to some protected dirs
-# todo disallow direct requests to:
-# -classes
-# -data (do we need this anymore - can't we just use the config?)
-# -pages
-# todo disable directory listing
+# Disallow access to some dirs
+<IfModule mod_rewrite.c>
+	RewriteRule ^(classes/|config/|pages/) index.php [L,QSA]
+</IfModule>
 
 ################################
 #   Ultimate htaccess tweaks   #
@@ -22,6 +19,7 @@
  
 # Security defaults
 ServerSignature Off
+Options -Indexes
  
 # MIME hotfix for client-side recognition
 AddType application/x-font-opentype .otf

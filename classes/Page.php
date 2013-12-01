@@ -9,6 +9,8 @@ class Page {
 	
 	protected $_title = 'Untitled';
 	
+	protected $_forbidden = array();
+	
 	protected $_meta = array(
 		'description' => '',
 		'copyright' => '',
@@ -25,6 +27,16 @@ class Page {
 	
 	public function __construct(Application $app){
 		$this->_app = $app;
+	}
+	
+	/**
+	 * Forbids access to specified URL parts.
+	 * @param string|array $pageOrPages Either a URL or a set of URLs.
+	 */
+	public function add_forbidden($pageOrPages){
+		if(is_string($pageOrPages))$pageOrPages = array($pageOrPages);
+		foreach($pageOrPages as $page)
+			$this->_forbidden[] = $page;
 	}
 	
 	/**
@@ -88,7 +100,7 @@ class Page {
 				$uri = substr($_SERVER['REQUEST_URI'], strlen(DEF_WEBPATH));
 				$uri = explode('?', $uri, 2);
 				$segments = explode('/', trim($uri[0], '/'), 3);
-				$this->_name_cache = array_pop($segments);
+				$this->_name_cache = array_shift($segments);
 			}
 				
 			// try with 'page' HTTP parameter
@@ -135,6 +147,8 @@ class Page {
 	 * @return string Page content.
 	 */
 	public function get_content($name){
+		if(in_array('/'.$name, $this->_forbidden))
+			throw new AccessForbiddenException('Access denied for page named "'.$name.'".');
 		if(!file_exists(DEF_ABSPATH.DS.'pages'.DS.$name.'.php'))
 			throw new ResourceNotFoundException('Could not load page named "'.$name.'".');
 		ob_start();

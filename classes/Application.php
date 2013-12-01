@@ -9,8 +9,8 @@ class Application {
 	
 	/**
 	 * Initialize a new Application instance.
-	 * @param Config $config
-	 * @param ErrorReporter $reporter
+	 * @param Config $config Configuration.
+	 * @param ErrorReporter $reporter Error reporter.
 	 */
 	public function __construct(Config $config, ErrorReporter $reporter){
 		self::$_current = $this;
@@ -18,7 +18,10 @@ class Application {
 		$this->_config = $config;
 		$this->_reporter = $reporter;
 		$this->_page = new Page($this);
+		
+		// load some default config into Page
 		$this->_page->set_title($config->get('deftitle', 'Untitled'));
+		$this->_page->add_forbidden($config->get('forbidden', array()));
 	}
 	
 	/**

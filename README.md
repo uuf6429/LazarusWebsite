@@ -16,7 +16,7 @@ Requirements
 ------------
 
  - cache folder must be writable (chmod 0777)
- - requires Apache mod_deflate and mod_rewrite
+ - requires Apache mod_deflate (compression), mod_expires+mod_headers (better caching) and mod_rewrite (nice urls)
  - requires at least PHP 5.2
 
 Todo List
