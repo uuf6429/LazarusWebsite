@@ -12,6 +12,20 @@ This source code is provided with an MIT license.
 
 Please note that this is not a continuation of the earlier license since the source code is a complete rewrite (and not a derivation).
 
+Features
+--------
+
+- Let's skip the better code etc argument
+- Supports all of the old features...and more (of course)
+- Configuration-based website that is easy to manage and consistent
+- Makes use of standard compression and caching apache modules
+- Clean URLs
+- Error pages (instead of plain apache pages)
+- Error/exception handling mechanism with graceful fallback
+- ErrorReporter - get to know about the bugs before the users
+- The website theme is liquid when the page width is less than 640px (effectively making it mobile friendly)
+- Automatically retrieves latest Lazarus version from SF
+
 Requirements
 ------------
 
@@ -28,6 +42,7 @@ Todo List
 - Slider doesn't look great on mobile site, do something about it
 - Do some real cross-browser checks
 - Ask around for inspiration on more features
+- Thanks to easy SMF integration, support more pages (eg; projects page etc)
 
 Links & Contact
 ---------------
